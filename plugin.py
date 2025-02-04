@@ -1,7 +1,7 @@
 # Luxtronic2 plugin based on sockets
 # Author: ajarzyna, 2021
 """
-<plugin key="LUXT2" name="Luxtronic2 based on sockets." author="ajarzyn" version="0.0.6">
+<plugin key="LUXT2" name="Luxtronic2 based on sockets." author="ajarzyn" version="0.0.7">
     <description>
         <h2>Luxtronic2 based on sockets.</h2><br/>
         Be aware:
@@ -166,6 +166,14 @@ _IDS = {
     'Room temperature set': [
         'Temperatura pokojowa - cel',
         'Raumtemperatur Soll'
+    ],
+    'Heat Output': [
+        'Moc grzewcza',
+        'Verwarmingsvermogen'
+    ],
+    'Power Input': [
+        'Pobór mocy',
+        'Gebruikt vermogen'
     ]
 }
 
@@ -193,6 +201,7 @@ def to_power_counter(data_list: list, cumulative_power_data_idx: int, additional
     sum_of_power = str(float(data_list[cumulative_power_data_idx] / power_sum_div))
     if int(data_list[state_curr_data_idx]) in acceptable_state:
         current_power = str(float(data_list[power_curr_data_idx] / power_curr_div))
+        Domoticz.Debug(f"Power Input Raw: {data_list[cumulative_power_data_idx]} W, Converted: {sum_of_power} kWh")
         return {'sValue': f"{current_power};{sum_of_power}"}
     else:
         return {'sValue': f"0;{sum_of_power}"}
@@ -367,6 +376,12 @@ class BasePlugin:
 
             ['READ_CALCUL', 228, (to_float, 10),
              dict(TypeName='Temperature', Used=0), ids('Room temperature set')],
+            
+            ['READ_CALCUL', 268, (to_power_counter, [1/1000, 268, 1, 80, [0, 1]]),
+             dict(TypeName='kWh', Used=1), ids('Power Input')],
+
+            ['READ_CALCUL', 257, (to_float, 1000),
+             dict(TypeName='Custom', Used=1, Options={'Custom': '1;kW'}), ids('Heat Output')],
 
             # ['READ_CALCUL', 56, 'time', dict(), IDS('Operating time')],
             # ['READ_CALCUL', 57, 1, dict(TypeName='Temperature', Used=1), IDS('Cycles')],
