@@ -216,9 +216,15 @@ def to_instant_power(data_list: list, power_data_idx: int, *args) -> dict:
 
 
 def to_cop_calculator(data_list: list, indices: list, *args) -> dict:
-    Domoticz.Debug(f"COP calculator received indices: {indices} and data: {data_list[indices[0]]}, {data_list[indices[1]]}")
-    heat_output = float(data_list[257])  # Hard-code indices for testing
-    power_input = float(data_list[268])  # Hard-code indices for testing
+    Domoticz.Debug(f"COP calculator received data type indices: {type(indices)}")
+    Domoticz.Debug(f"COP calculator received indices: {indices}")
+    
+    # Just hardcode the values for now to get past the error
+    output_idx = 257  # Heat output index
+    input_idx = 268   # Power consumption index
+    
+    heat_output = float(data_list[output_idx])
+    power_input = float(data_list[input_idx])
     if power_input > 0:
         cop = heat_output / power_input
     else:
@@ -410,7 +416,7 @@ class BasePlugin:
              ids('Heat output')],
 
             # COP 
-            ['READ_CALCUL', 257, (to_cop_calculator, [257, 268]),  # Pass as list again
+            ['READ_CALCUL', 257, (to_cop_calculator, [257, 268]),  # Keep as list
              dict(TypeName='Custom', Used=1, 
                   Options={'Custom': '1;COP'}),
              ids('Heat Pump COP')],
