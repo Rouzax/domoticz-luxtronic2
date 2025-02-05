@@ -214,6 +214,30 @@ def to_instant_power(data_list: list, power_data_idx: int, *args) -> dict:
     instant_power = float(data_list[power_data_idx])
     return {'sValue': f"{instant_power};0"}
 
+def to_instant_power_split(data_list: list, power_data_idx: int, additional_data: list) -> dict:
+    """
+    Splits instant power into heating or hot water based on operating mode.
+    
+    Args:
+        data_list: Raw data from heat pump
+        power_data_idx: Index for power value
+        additional_data: [state_idx, valid_states]
+    
+    Returns:
+        Dictionary with sValue formatted for Domoticz cumulative meter
+    """
+    state_idx, valid_states = additional_data
+    instant_power = float(data_list[power_data_idx])
+    
+    # Check operating mode
+    current_state = int(data_list[state_idx])
+    
+    # If not in a valid state, return 0 power
+    if current_state not in valid_states:
+        return {'sValue': f"0;0"}
+        
+    return {'sValue': f"{instant_power};0"}
+
 
 def to_cop_calculator(data_list: list, indices: int, *args) -> dict:
     indices_list = args[0]
@@ -401,13 +425,13 @@ class BasePlugin:
             
             # Power consumption
             ['READ_CALCUL', 268, (to_instant_power, [268]),
-             dict(TypeName='kWh', Switchtype=4, Used=1, 
+             dict(TypeName='kWh', Used=1, 
                   Options={'EnergyMeterMode': '1'}),
              ids('Power consumption')],
 
             # Heat output
             ['READ_CALCUL', 257, (to_instant_power, [257]),
-             dict(TypeName='kWh', Switchtype=4, Used=1,
+             dict(TypeName='kWh', Used=1,
                   Options={'EnergyMeterMode': '1'}),
              ids('Heat output')],
 
@@ -416,6 +440,18 @@ class BasePlugin:
              dict(TypeName='Custom', Used=1, 
                   Options={'Custom': '1;COP'}),
              ids('Heat Pump COP')],
+            
+            # Test Heating Energy
+            ['READ_CALCUL', 268, (to_instant_power_split, [80, [0]]),
+             dict(TypeName='kWh', Used=1, 
+                  Options={'EnergyMeterMode': '1'}),
+             ids('Test Energy - heating')],
+                  
+            # Test Hot Water Energy
+            ['READ_CALCUL', 268, (to_instant_power_split, [80, [1]]),
+             dict(TypeName='kWh', Used=1, 
+                  Options={'EnergyMeterMode': '1'}),
+             ids('Test Energy - hot water')]
             
             # ['READ_CALCUL', 56, 'time', dict(), IDS('Operating time')],
             # ['READ_CALCUL', 57, 1, dict(TypeName='Temperature', Used=1), IDS('Cycles')],
