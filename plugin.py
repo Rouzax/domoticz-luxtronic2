@@ -216,7 +216,7 @@ def to_instant_power(data_list: list, power_data_idx: int, *args) -> dict:
     return {'sValue': f"{instant_power};0"}
 
 
-def to_cop_calculator(data_list: list, heat_output_idx: int, power_input_idx: int) -> dict:
+def to_cop_calculator(data_list: list, heat_output_idx: int, power_input_idx: int, *args) -> dict:
     heat_output = float(data_list[heat_output_idx])
     power_input = float(data_list[power_input_idx])
     if power_input > 0:
@@ -408,8 +408,8 @@ class BasePlugin:
                   Options={'EnergyMeterMode': '1'}),
              ids('Heat output')],
 
-            # COP
-            ['READ_CALCUL', 257, (to_cop_calculator, [257, 268]),
+            # COP 
+            ['READ_CALCUL', 257, (to_cop_calculator, [257, 268]),  # Changed from [257, [268]] to [257, 268]
              dict(TypeName='Custom', Used=1, 
                   Options={'Custom': '1;COP'}),
              ids('Heat Pump COP')],
