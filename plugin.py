@@ -216,13 +216,9 @@ def to_instant_power(data_list: list, power_data_idx: int, *args) -> dict:
 
 
 def to_cop_calculator(data_list: list, indices: int, *args) -> dict:
-    Domoticz.Debug(f"COP calculator got: indices={indices}, args={args}")
-    if isinstance(indices, int):
-        power_input_idx = 268  # Hard-code power input index for now
-        heat_output_idx = indices
-    else:
-        heat_output_idx, power_input_idx = indices
-        
+    indices_list = args[0]
+    heat_output_idx, power_input_idx = indices_list
+    
     heat_output = float(data_list[heat_output_idx])
     power_input = float(data_list[power_input_idx])
     
