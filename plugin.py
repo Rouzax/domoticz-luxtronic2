@@ -210,10 +210,10 @@ def to_power_counter(data_list: list, cumulative_power_data_idx: int, additional
         return {'sValue': f"0;{sum_of_power}"}
     
     
-def to_instant_power(data_list: list, power_data_idx: int) -> dict:
-    # Just send instant power in Watts
+def to_instant_power(data_list: list, power_data_idx: int, *args) -> dict:
+    # Just send instant power in Watts with ;0 for kWh format
     instant_power = float(data_list[power_data_idx])
-    return {'sValue': f"{instant_power};0"}  # The ;0 is still needed for the kWh device format
+    return {'sValue': f"{instant_power};0"}
 
 
 def to_cop_calculator(data_list: list, heat_output_idx: int, power_input_idx: int) -> dict:
@@ -401,7 +401,7 @@ class BasePlugin:
              dict(TypeName='kWh', Switchtype=4, Used=1, 
                   Options={'EnergyMeterMode': '1'}),
              ids('Power consumption')],
-            
+
             # Heat output
             ['READ_CALCUL', 257, (to_instant_power, [257]),
              dict(TypeName='kWh', Switchtype=4, Used=1,
