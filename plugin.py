@@ -1,7 +1,7 @@
 # Luxtronic2 plugin based on sockets
 # Author: ajarzyna, 2021
 """
-<plugin key="LUXT2" name="Luxtronic2 based on sockets." author="ajarzyn" version="0.0.7">
+<plugin key="LUXT2TEST" name="_TEST Luxtronic2 based on sockets." author="ajarzyn" version="0.0.7">
     <description>
         <h2>Luxtronic2 based on sockets.</h2><br/>
         Be aware:
@@ -45,15 +45,15 @@ import re
 _IDS = {
     'Heating supply temperature': [
         'Temperatura zasilania',
-        'Temperatuur aanvoer'
+        'Aanvoertemperatuur verwarming'
     ],
     'Heating return temperature': [
         'Temperatura powrótu',
-        'Temperatuur retour',
+        'Retourtemperatuur verwarming'
     ],
     'Heating return temperature - target': [
         'Temperatura powrótu - cel',
-        'Retour berekend'
+        'Retourtemperatuur verwarming - doel'
     ],
     'Outside temperature': [
         'Temperatura zewnętrzna',
@@ -65,31 +65,31 @@ _IDS = {
     ],
     'Hot water temperature': [
         'Temperatura cwu',
-        'Tapwater gemeten'
+        'Temperatuur tapwater'
     ],
     'Hot water temperature - target': [
         'Temperatura cwu - cel',
-        'Tapwater ingesteld'
+        'Temperatuur tapwater ingesteld'
     ],
     'Ground source temperature - in': [
         'Temperatura dolne źródło-wejście',
-        'Bron-in'
+        'Temperatuur Bron-in'
     ],
     'Ground source temperature - out': [
         'Temperatura dolne źródło-wyjście',
-        'Bron-uit'
+        'Temperatuur Bron-uit'
     ],
     'OM 1 Temperature': [
         'Temperatura zasilanie OM 1',
-        'Menggroep1 aanvoer'
+        'Temperatuur Menggroep1 aanvoer'
     ],
     'OM 1 Temperature - target': [
         'Temperatura zasilanie OM 1 - cel',
-        'Menggroep1 aanvoer ingesteld'
+        'Temperatuur Menggroep1 aanvoer ingesteld'
     ],
     'Heating mode': [
         'Obieg grzewczy',
-        'Verwarmingsbedrijf'
+        'Verwarmen'
     ],
     'Hot water mode': [
         'Woda użytkowa',
@@ -97,27 +97,59 @@ _IDS = {
     ],
     'Cooling': [
         'Chłodzenie',
-        'Koelbedrijf'
+        'Koeling'
     ],
-    'Operating time': [
-        'Czas pracy',
-        'Bedrijfstijd Verdichter 1'
+    'Temperature +-': [
+        'Temperatura +-',
+        'Temperatuur +- '
     ],
-    'Cycles': [
-        'Cykli',
-        'Impuls VD1'
+    'Working mode': [
+        'Stan pracy',
+        'Bedrijfsmode'
     ],
-    'Energy produced - heating': [
-        'Energia wyprodukowana - ogrzewanie',
-        'Verbruik verwarmen'
+    'Flow': [
+        'Przepływ',
+        'Waterdebiet'
     ],
-    'Energy produced - hot water': [
-        'Energia wyprodukowana - c.w.u',
-        'Verbruik warmwater'
+    'Compressor frequency': [
+        'Częstotliwość sprężarki',
+        'Compressor frequentie'
     ],
-    'Energy produced - sum': [
-        'Energia wyprodukowana - Razem',
-        'Verbruik gezamelijk'
+    'Actual room temperature': [
+        'Temperatura pokojowa',
+        'Temperatuur ruimte actueel'
+    ],
+    'Room temperature set': [
+        'Temperatura pokojowa - cel',
+        'Temperatuur ruimte gewenst'
+    ],
+    'Power consumption - Total': [
+        'Pobór mocy - Razem',
+        'Totaal energieverbruik systeem'
+    ],
+    'Power consumption - Heating': [
+        'Pobór mocy - Ogrzewanie',
+        'Energieverbruik verwarmings'
+    ],
+    'Power consumption - Hot water': [
+        'Pobór mocy - CWU',
+        'Energieverbruik warmwater'
+    ],
+    'Heat output - Total': [
+        'Moc grzewcza - Razem',
+        'verwarmingsvermogen - Totaal'
+    ],
+    'Heat output - Heating': [
+        'Moc grzewcza - Ogrzewanie',
+        'Verwarmingsvermogen - Verwarming'
+    ],
+    'Heat output - Hot water': [
+        'Moc grzewcza - CWU',
+        'Verwarmingsvermogen - Warmwater'
+    ],
+    'Heat Pump COP - Total': [
+        'COP pompy ciepła - Razem',
+        'Warmtepomp COP systeem totaal'
     ],
     'Automat.|2nd h. source|Party|Holidays|Off': [
         'Automat.|II źr. ciepła|Party|Wakacje|Wył.',
@@ -125,59 +157,23 @@ _IDS = {
     ],
     'No requirement': [
         'Brak zapotrzebowania',
-        'Geen vraag',
-    ],
-    'Working mode': [
-        'Stan pracy',
-        'Bedrijfsmode'
+        'Geen warmtevraag',
     ],
     'Swimming pool mode / Photovaltaik': [
         'Tryb basen / Fotowoltaika',
         'Zwembad / Fotovoltaïek'
-        ],
+    ],
     'EVUM': [
         'EVU',
         'EVU'
-        ],
+    ],
     'Defrost': [
         'Rozmrażanie',
         'Ontdooien'
-        ],
+    ],
     'Heating external source mode': [
         'Ogrzewanie z zewnętrznego źródła',
         'Verwarmen 2e warm.opwek'
-        ],
-    'Flow': [
-        'Przepływ',
-        'Debiet'
-    ],
-    'Compressor frequency': [
-        'Częstotliwość sprężarki',
-        'Freq. '
-    ],
-    'Temperature +-': [
-        'Temperatura +-',
-        '[DE]Temperature +-. '
-    ],
-    'Actual room temperature': [
-        'Temperatura pokojowa',
-        'Raumtemperatur Ist. '
-    ],
-    'Room temperature set': [
-        'Temperatura pokojowa - cel',
-        'Raumtemperatur Soll'
-    ],
-    'Power consumption': [
-        'Pobór mocy',
-        'Stroomverbruik'
-    ],
-    'Heat output': [
-        'Moc grzewcza',
-        'Warmte output'
-    ],
-    'Heat Pump COP': [
-        'COP pompy ciepła',
-        'Warmtepomp COP'
     ]
 }
 
@@ -198,16 +194,6 @@ def to_number(data_list: list, data_idx: int, divider: float = 1.0) -> dict:
 def selector_switch_level_mapping(data_list: list, data_idx: int, mapping: list) -> dict:
     level = mapping.index(data_list[data_idx]) * 10
     return {'nValue': int(level), 'sValue': str(level)}
-
-
-def to_power_counter(data_list: list, cumulative_power_data_idx: int, additional_data_list: list) -> dict:
-    power_sum_div, power_curr_data_idx, power_curr_div, state_curr_data_idx, acceptable_state = additional_data_list
-    sum_of_power = str(float(data_list[cumulative_power_data_idx] / power_sum_div))
-    if int(data_list[state_curr_data_idx]) in acceptable_state:
-        current_power = str(float(data_list[power_curr_data_idx] / power_curr_div))
-        return {'sValue': f"{current_power};{sum_of_power}"}
-    else:
-        return {'sValue': f"0;{sum_of_power}"}
     
     
 def to_instant_power(data_list: list, power_data_idx: int, *args) -> dict:
@@ -252,10 +238,66 @@ def to_cop_calculator(data_list: list, indices: int, *args) -> dict:
         cop = 0
     return {'sValue': str(round(cop, 2))}
 
+def to_text_state(data_list: list, data_idx: int, config: list) -> dict:
+    """
+    Converts heat pump state to text status
+    """
+    # Operating modes based on ID_WEB_WP_BZ_akt values
+    mode_names = {
+        0: ids('Heating mode'),      # heating
+        1: ids('Hot water mode'),    # hot water
+        2: ids('Swimming pool mode / Photovaltaik'),
+        3: ids('Cooling'),
+        4: ids('No requirement')     # off/no requirement
+    }
+    
+    power_idx, power_threshold = config
+    
+    # Get current power consumption
+    current_power = float(data_list[power_idx])
+    
+    # Get current mode
+    current_mode = data_list[data_idx]
+    
+    # Debug print
+    Domoticz.Debug(f"Power: {current_power}, Mode: {current_mode}, Raw data[80]: {data_list[data_idx]}")
+    
+    # If power consumption is below threshold, return "No requirement"
+    if current_power <= power_threshold:
+        return {'nValue': 0, 'sValue': ids('No requirement')}
+    
+    # Map mode to text, with debug
+    state_text = mode_names.get(current_mode, ids('No requirement'))
+    Domoticz.Debug(f"Mapped state text: {state_text}")
+    
+    return {'nValue': 0, 'sValue': state_text}
 
-def to_alert(data_list: list, data_idx: int, mapping: list) -> dict:
-    Domoticz.Debug(str(data_list[data_idx]) + " " + str(mapping))
-    return {'nValue': int(mapping[data_list[data_idx]][0]), 'sValue': str(mapping[data_list[data_idx]][1])}
+
+def to_time_counter(data_list: list, data_idx: int, config: list) -> dict:
+    """
+    Converts current running seconds to counter increment
+    Args:
+        data_list: Raw data from heat pump
+        data_idx: Index for timer value (67)
+        config: [last_value_idx] (we need to store last value to calculate delta)
+    """
+    current_seconds = data_list[data_idx]
+    
+    # Store the last value between updates to calculate delta
+    if not hasattr(to_time_counter, 'last_value'):
+        to_time_counter.last_value = current_seconds
+    
+    # Calculate delta (time difference since last update)
+    delta = current_seconds - to_time_counter.last_value
+    
+    # Handle rollover/reset cases
+    if delta < 0:
+        delta = current_seconds
+    
+    # Update last value for next time
+    to_time_counter.last_value = current_seconds
+    
+    return {'nValue': 0, 'sValue': str(delta)}
 
 
 # Write callbacks
@@ -357,10 +399,13 @@ class BasePlugin:
              dict(TypeName='Temperature', Used=1), ids('Outside temperature')],
 
             ['READ_CALCUL', 16, (to_float, 10),
-             dict(TypeName='Temperature', Used=1), ids('Outside temperature - average')],
+             dict(TypeName='Temperature', Used=0), ids('Outside temperature - average')],
 
             ['READ_CALCUL', 17, (to_float, 10),
              dict(TypeName='Temperature', Used=1), ids('Hot water temperature')],
+
+            ['READ_PARAMS', 105, (to_float, 10),
+            dict(Type=242, Subtype=1, Used=0), ids('Hot water temperature - target'), (level_with_divider, 1/10)],
 
             ['READ_CALCUL', 19, (to_float, 10),
              dict(TypeName='Temperature', Used=1), ids('Ground source temperature - in')],
@@ -373,15 +418,6 @@ class BasePlugin:
 
             ['READ_CALCUL', 22, (to_float, 10),
              dict(TypeName='Temperature', Used=0), ids('OM 1 Temperature - target')],
-
-            ['READ_CALCUL', 151, (to_power_counter, [1/100, 257, 1, 80, [0]]),
-             dict(TypeName='kWh', Used=1), ids('Energy produced - heating')],
-
-            ['READ_CALCUL', 152, (to_power_counter, [1/100, 257, 1, 80, [1]]),
-             dict(TypeName='kWh', Used=1), ids('Energy produced - hot water')],
-
-            ['READ_CALCUL', 154, (to_power_counter, [1/100, 257, 1, 80, [0, 1]]),
-             dict(TypeName='kWh', Used=1), ids('Energy produced - sum')],
 
             ['READ_PARAMS', 3, (selector_switch_level_mapping, self.available_writes[3].get_val()),
              dict(TypeName='Selector Switch', Image=7, Used=1,
@@ -403,13 +439,10 @@ class BasePlugin:
              dict(TypeName='Switch', Image=9, Used=0), ids('Cooling'), [command_to_number]],
 
             ['READ_PARAMS', 1, (to_float, 10),
-             dict(Type=242, Subtype=1, Used=1), ids('Temperature +-'), (level_with_divider, 1/10)],
+             dict(Type=242, Subtype=1, Used=0), ids('Temperature +-'), (level_with_divider, 1/10)],
 
-            ['READ_PARAMS', 105, (to_float, 10),
-            dict(Type=242, Subtype=1, Used=1), ids('Hot water temperature - target'), (level_with_divider, 1/10)],
-
-            ['READ_CALCUL', 80, (to_alert, work_modes_mapping),
-             dict(TypeName='Alert', Image=15, Used=1), ids('Working mode')],
+            ['READ_CALCUL', 80, (to_text_state, [268, 0.1]),
+             dict(TypeName='Text', Used=1), ids('Working mode')],
 
             ['READ_CALCUL', 173, (to_float, 1),
              dict(TypeName='Custom', Used=1, Options={'Custom': '1;l/h'}), ids('Flow')],
@@ -425,38 +458,45 @@ class BasePlugin:
             
             # Power consumption
             ['READ_CALCUL', 268, (to_instant_power, [268]),
-             dict(TypeName='kWh', Used=1, 
+             dict(TypeName='kWh', Used=1,
                   Options={'EnergyMeterMode': '1'}),
-             ids('Power consumption')],
+             ids('Power consumption - Total')],
 
-            # Heat output
+            # Power consumption for heating mode
+            ['READ_CALCUL', 268, (to_instant_power_split, [80, [0]]),
+             dict(TypeName='kWh', Used=1,
+                  Options={'EnergyMeterMode': '1'}),
+             ids('Power consumption - Heating')],
+
+            # Power consumption for hot water mode
+            ['READ_CALCUL', 268, (to_instant_power_split, [80, [1]]),
+             dict(TypeName='kWh', Used=1,
+                  Options={'EnergyMeterMode': '1'}),
+             ids('Power consumption - Hot water')],
+
+            # Heat output total
             ['READ_CALCUL', 257, (to_instant_power, [257]),
              dict(TypeName='kWh', Used=1,
                   Options={'EnergyMeterMode': '1'}),
-             ids('Heat output')],
+             ids('Heat output - Total')],
 
-            # COP 
+            # Heat output heating mode
+            ['READ_CALCUL', 257, (to_instant_power_split, [80, [0]]),
+             dict(TypeName='kWh', Used=1,
+                  Options={'EnergyMeterMode': '1'}),
+             ids('Heat output - Heating')],
+
+            # Heat output hot water mode
+            ['READ_CALCUL', 257, (to_instant_power_split, [80, [1]]),
+             dict(TypeName='kWh', Used=1,
+                  Options={'EnergyMeterMode': '1'}),
+             ids('Heat output - Hot water')],
+
+            # COP calculated over total
             ['READ_CALCUL', 257, (to_cop_calculator, [257, 268]),
-             dict(TypeName='Custom', Used=1, 
+             dict(TypeName='Custom', Used=1,
                   Options={'Custom': '1;COP'}),
-             ids('Heat Pump COP')],
-            
-            # Test Heating Energy
-            ['READ_CALCUL', 268, (to_instant_power_split, [80, [0]]),
-             dict(TypeName='kWh', Used=1, 
-                  Options={'EnergyMeterMode': '1'}),
-             ids('Test Energy - heating')],
-                  
-            # Test Hot Water Energy
-            ['READ_CALCUL', 268, (to_instant_power_split, [80, [1]]),
-             dict(TypeName='kWh', Used=1, 
-                  Options={'EnergyMeterMode': '1'}),
-             ids('Test Energy - hot water')]
-            
-            # ['READ_CALCUL', 56, 'time', dict(), IDS('Operating time')],
-            # ['READ_CALCUL', 57, 1, dict(TypeName='Temperature', Used=1), IDS('Cycles')],
-            # ['READ_CALCUL', 22, 10, dict(TypeName='Temperature', Used=1), IDS('')],
-            # ['READ_CALCUL', 22, 10, dict(TypeName='Temperature', Used=1), IDS('')],
+             ids('Heat Pump COP - Total')],
         ]
 
         class Unit:
