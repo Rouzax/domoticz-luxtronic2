@@ -215,21 +215,13 @@ def to_instant_power(data_list: list, power_data_idx: int, *args) -> dict:
     return {'sValue': f"{instant_power};0"}
 
 
-def to_cop_calculator(data_list: list, indices: list, *args) -> dict:
-    Domoticz.Debug(f"COP calculator received data type indices: {type(indices)}")
-    Domoticz.Debug(f"COP calculator received indices: {indices}")
-    
-    # Just hardcode the values for now to get past the error
-    output_idx = 257  # Heat output index
-    input_idx = 268   # Power consumption index
-    
-    heat_output = float(data_list[output_idx])
-    power_input = float(data_list[input_idx])
+def to_cop_calculator(data_list: list, heat_output_idx: int, power_input_idx: int = 268, *args) -> dict:
+    heat_output = float(data_list[heat_output_idx])
+    power_input = float(data_list[power_input_idx])
     if power_input > 0:
         cop = heat_output / power_input
     else:
         cop = 0
-    Domoticz.Debug(f"COP calculation: {heat_output} / {power_input} = {cop}")
     return {'sValue': str(round(cop, 2))}
 
 
@@ -416,7 +408,7 @@ class BasePlugin:
              ids('Heat output')],
 
             # COP 
-            ['READ_CALCUL', 257, (to_cop_calculator, [257, 268]),  # Keep as list
+            ['READ_CALCUL', 257, (to_cop_calculator, 257, 268),  # Pass as separate arguments, not list
              dict(TypeName='Custom', Used=1, 
                   Options={'Custom': '1;COP'}),
              ids('Heat Pump COP')],
