@@ -211,19 +211,18 @@ def to_power_counter(data_list: list, cumulative_power_data_idx: int, additional
     
     
 def to_instant_power(data_list: list, power_data_idx: int, *args) -> dict:
-    # Just send instant power in Watts with ;0 for kWh format
     instant_power = float(data_list[power_data_idx])
     return {'sValue': f"{instant_power};0"}
 
 
-def to_cop_calculator(data_list: list, indices: list, *args) -> dict:
-    heat_output = float(data_list[indices[0]])  # 257
-    power_input = float(data_list[indices[1]])  # 268
+def to_cop_calculator(data_list: list, heat_output_idx: int, power_input_idx: int, *args) -> dict:
+    heat_output = float(data_list[heat_output_idx])
+    power_input = float(data_list[power_input_idx])
     if power_input > 0:
         cop = heat_output / power_input
     else:
         cop = 0
-    return {'sValue': str(round(cop, 2))}  # Added rounding to 2 decimal places
+    return {'sValue': str(round(cop, 2))}
 
 
 def to_alert(data_list: list, data_idx: int, mapping: list) -> dict:
@@ -409,11 +408,11 @@ class BasePlugin:
              ids('Heat output')],
 
             # COP 
-            ['READ_CALCUL', 257, (to_cop_calculator, [257, 268]),
+            ['READ_CALCUL', 257, (to_cop_calculator, 257, 268),
              dict(TypeName='Custom', Used=1, 
                   Options={'Custom': '1;COP'}),
              ids('Heat Pump COP')],
-            
+
             # ['READ_CALCUL', 56, 'time', dict(), IDS('Operating time')],
             # ['READ_CALCUL', 57, 1, dict(TypeName='Temperature', Used=1), IDS('Cycles')],
             # ['READ_CALCUL', 22, 10, dict(TypeName='Temperature', Used=1), IDS('')],
