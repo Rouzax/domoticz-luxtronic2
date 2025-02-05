@@ -678,8 +678,8 @@ def update_device(Unit: int = None, nValue: int = None, sValue: str = None, Imag
         largs["Type"] = Type
     if Subtype is not None:
         largs["Subtype"] = Subtype
-    if Switchtype is not None and Switchtype != Devices[Unit].Switchtype:
-        largs["Switchtype"] = Switchtype
+    if Switchtype is not None and Switchtype != getattr(Devices[Unit], 'SwitchType', None):  # Changed here
+        largs["SwitchType"] = Switchtype  # And here
     if Used is not None and Used != Devices[Unit].Used:
         largs["Used"] = Used
     if Description is not None and Description != Devices[Unit].Description:
