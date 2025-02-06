@@ -490,19 +490,19 @@ class BasePlugin:
 
             # Heat output total
             ['READ_CALCUL', 257, (to_instant_power, [257]),
-             dict(TypeName='kWh', Used=1,
+             dict(TypeName='kWh', Switchtype=4, Image=15, Used=1,
                   Options={'EnergyMeterMode': '1'}),
              ids('Heat out total')],
 
             # Heat output heating mode
             ['READ_CALCUL', 257, (to_instant_power_split, [80, [0]]),
-             dict(TypeName='kWh', Used=1,
+             dict(TypeName='kWh', Switchtype=4, Image=15, Used=1,
                   Options={'EnergyMeterMode': '1'}),
              ids('Heat out heating')],
 
             # Heat output hot water mode
             ['READ_CALCUL', 257, (to_instant_power_split, [80, [1]]),
-             dict(TypeName='kWh', Used=1,
+             dict(TypeName='kWh', Switchtype=4, Image=15, Used=1,
                   Options={'EnergyMeterMode': '1'}),
              ids('Heat out DHW')],
 
