@@ -43,49 +43,57 @@ import re
 
 
 _IDS = {
-    'Heating supply temperature': [
-        'Temperatura zasilania',
-        'Aanvoertemperatuur verwarming'
+    'Heat supply temp': [
+        'Temp zasilania',
+        'Aanvoertemp verw'
     ],
-    'Heating return temperature': [
-        'Temperatura powrótu',
-        'Retourtemperatuur verwarming'
+    'Heat return temp': [
+        'Temp powrotu',
+        'Retourtemp verw'
     ],
-    'Heating return temperature - target': [
-        'Temperatura powrótu - cel',
-        'Retourtemperatuur verwarming - doel'
+    'Return temp target': [
+        'Temp powr cel',
+        'Retourtemp doel'
     ],
-    'Outside temperature': [
-        'Temperatura zewnętrzna',
-        'Buitentemperatuur'
+    'Outside temp': [
+        'Temp zewn',
+        'Buitentemp'
     ],
-    'Outside temperature - average': [
-        'Temperatura zewnętrzna - średnia',
-        'Buitentemperatuur - gemiddeld'
+    'Outside temp avg': [
+        'Temp zewn śred',
+        'Buitentemp gem'
     ],
-    'Hot water temperature': [
-        'Temperatura cwu',
-        'Temperatuur tapwater'
+    'DHW temp': [
+        'Temp cwu',
+        'Temp tapwater'
     ],
-    'Hot water temperature - target': [
-        'Temperatura cwu - cel',
-        'Temperatuur tapwater ingesteld'
+    'DHW temp target': [
+        'Temp cwu cel',
+        'Tapwater inst'
     ],
-    'Ground source temperature - in': [
-        'Temperatura dolne źródło-wejście',
-        'Temperatuur Bron-in'
+    'WP source in temp': [
+        'Temp WP źródło wej',
+        'WP bron in temp'
     ],
-    'Ground source temperature - out': [
-        'Temperatura dolne źródło-wyjście',
-        'Temperatuur Bron-uit'
+    'WP source out temp': [
+        'Temp WP źródło wyj',
+        'WP bron uit temp'
     ],
-    'OM 1 Temperature': [
-        'Temperatura zasilanie OM 1',
-        'Temperatuur Menggroep1 aanvoer'
+    'MC1 temp': [
+        'Temp OM1',
+        'Menggroep1 temp'
     ],
-    'OM 1 Temperature - target': [
-        'Temperatura zasilanie OM 1 - cel',
-        'Temperatuur Menggroep1 aanvoer ingesteld'
+    'MC1 temp target': [
+        'Temp OM1 cel',
+        'Menggroep1 inst'
+    ],
+    'MC2 temp': [
+        'Temp OM2',
+        'Menggroep2 temp'
+    ],
+    'MC2 temp target': [
+        'Temp OM2 cel',
+        'Menggroep2 inst'
     ],
     'Heating mode': [
         'Obieg grzewczy',
@@ -98,58 +106,6 @@ _IDS = {
     'Cooling': [
         'Chłodzenie',
         'Koeling'
-    ],
-    'Temperature +-': [
-        'Temperatura +-',
-        'Temperatuur +- '
-    ],
-    'Working mode': [
-        'Stan pracy',
-        'Bedrijfsmode'
-    ],
-    'Flow': [
-        'Przepływ',
-        'Waterdebiet'
-    ],
-    'Compressor frequency': [
-        'Częstotliwość sprężarki',
-        'Compressor frequentie'
-    ],
-    'Actual room temperature': [
-        'Temperatura pokojowa',
-        'Temperatuur ruimte actueel'
-    ],
-    'Room temperature set': [
-        'Temperatura pokojowa - cel',
-        'Temperatuur ruimte gewenst'
-    ],
-    'Power consumption - Total': [
-        'Pobór mocy - Razem',
-        'Totaal energieverbruik systeem'
-    ],
-    'Power consumption - Heating': [
-        'Pobór mocy - Ogrzewanie',
-        'Energieverbruik verwarmings'
-    ],
-    'Power consumption - Hot water': [
-        'Pobór mocy - CWU',
-        'Energieverbruik warmwater'
-    ],
-    'Heat output - Total': [
-        'Moc grzewcza - Razem',
-        'verwarmingsvermogen - Totaal'
-    ],
-    'Heat output - Heating': [
-        'Moc grzewcza - Ogrzewanie',
-        'Verwarmingsvermogen - Verwarming'
-    ],
-    'Heat output - Hot water': [
-        'Moc grzewcza - CWU',
-        'Verwarmingsvermogen - Warmwater'
-    ],
-    'Heat Pump COP - Total': [
-        'COP pompy ciepła - Razem',
-        'Warmtepomp COP systeem totaal'
     ],
     'Automat.|2nd h. source|Party|Holidays|Off': [
         'Automat.|II źr. ciepła|Party|Wakacje|Wył.',
@@ -174,6 +130,58 @@ _IDS = {
     'Heating external source mode': [
         'Ogrzewanie z zewnętrznego źródła',
         'Verwarmen 2e warm.opwek'
+    ],
+    'Temp +-': [
+        'Temp +-',
+        'Temp +-'
+    ],
+    'Working mode': [
+        'Stan pracy',
+        'Bedrijfsmode'
+    ],
+    'Flow': [
+        'Przepływ',
+        'Debiet'
+    ],
+    'Compressor freq': [
+        'Częst sprężarki',
+        'Compr freq'
+    ],
+    'Room temp': [
+        'Temp pokojowa',
+        'Ruimtetemp act'
+    ],
+    'Room temp target': [
+        'Temp pokoj cel',
+        'Ruimtetemp gew'
+    ],
+    'Power total': [
+        'Pobór mocy',
+        'Energie totaal'
+    ],
+    'Power heating': [
+        'Pobór grz',
+        'Energie verw'
+    ],
+    'Power DHW': [
+        'Pobór cwu',
+        'Energie warmw'
+    ],
+    'Heat out total': [
+        'Moc grz razem',
+        'Verwarm totaal'
+    ],
+    'Heat out heating': [
+        'Moc grz ogrz',
+        'Verwarm verw'
+    ],
+    'Heat out DHW': [
+        'Moc grz cwu',
+        'Verwarm warmw'
+    ],
+    'COP total': [
+        'COP razem',
+        'COP totaal'
     ]
 }
 
@@ -360,10 +368,10 @@ class BasePlugin:
     def prepare_devices_list(self):
         self.available_writes = {
             -1: Field(),
-            1: Field(ids('Temperature +-'), [a for a in range(-50, 51, 5)]),
+            1: Field(ids('Temp +-'), [a for a in range(-50, 51, 5)]),
             3: Field(ids('Heating mode'), [0, 1, 2, 3, 4]),
             4: Field(ids('Hot water mode'), [0, 1, 2, 3, 4]),
-            105: Field(ids('Hot water temperature - target'), [a for a in range(300, 651, 5)]),
+            105: Field(ids('DHW temp target'), [a for a in range(300, 651, 5)]),
             108: Field(ids('Cooling'), [0, 1])
         }
 
@@ -387,37 +395,43 @@ class BasePlugin:
             # 4 Name of the domoticz device,
             # 5 tuple(write callback, list of additional write needed data (conversion, indexes))
             ['READ_CALCUL', 10, (to_float, 10),
-             dict(TypeName='Temperature', Used=1), ids('Heating supply temperature')],
+             dict(TypeName='Temperature', Used=1), ids('Heat supply temp')],
 
             ['READ_CALCUL', 11, (to_float, 10),
-             dict(TypeName='Temperature', Used=1), ids('Heating return temperature')],
+             dict(TypeName='Temperature', Used=1), ids('Heat return temp')],
 
             ['READ_CALCUL', 12, (to_float, 10),
-             dict(TypeName='Temperature', Used=1), ids('Heating return temperature - target')],
+             dict(TypeName='Temperature', Used=1), ids('Return temp target')],
 
             ['READ_CALCUL', 15, (to_float, 10),
-             dict(TypeName='Temperature', Used=1), ids('Outside temperature')],
+             dict(TypeName='Temperature', Used=1), ids('Outside temp')],
 
             ['READ_CALCUL', 16, (to_float, 10),
-             dict(TypeName='Temperature', Used=0), ids('Outside temperature - average')],
+             dict(TypeName='Temperature', Used=0), ids('Outside temp avg')],
 
             ['READ_CALCUL', 17, (to_float, 10),
-             dict(TypeName='Temperature', Used=1), ids('Hot water temperature')],
+             dict(TypeName='Temperature', Used=1), ids('DHW temp')],
 
             ['READ_PARAMS', 105, (to_float, 10),
-            dict(Type=242, Subtype=1, Used=0), ids('Hot water temperature - target'), (level_with_divider, 1/10)],
+            dict(Type=242, Subtype=1, Used=0), ids('DHW temp target'), (level_with_divider, 1/10)],
 
             ['READ_CALCUL', 19, (to_float, 10),
-             dict(TypeName='Temperature', Used=1), ids('Ground source temperature - in')],
+             dict(TypeName='Temperature', Used=1), ids('WP source in temp')],
 
             ['READ_CALCUL', 20, (to_float, 10),
-             dict(TypeName='Temperature', Used=1), ids('Ground source temperature - out')],
+             dict(TypeName='Temperature', Used=1), ids('WP source out temp')],
 
             ['READ_CALCUL', 21, (to_float, 10),
-             dict(TypeName='Temperature', Used=0), ids('OM 1 Temperature')],
+             dict(TypeName='Temperature', Used=0), ids('MC1 temp')],
 
             ['READ_CALCUL', 22, (to_float, 10),
-             dict(TypeName='Temperature', Used=0), ids('OM 1 Temperature - target')],
+             dict(TypeName='Temperature', Used=0), ids('MC1 temp target')],
+            
+            ['READ_CALCUL', 24, (to_float, 10),
+             dict(TypeName='Temperature', Used=0), ids('MC2 temp')],
+
+            ['READ_CALCUL', 25, (to_float, 10),
+             dict(TypeName='Temperature', Used=0), ids('MC2 temp target')],
 
             ['READ_PARAMS', 3, (selector_switch_level_mapping, self.available_writes[3].get_val()),
              dict(TypeName='Selector Switch', Image=7, Used=1,
@@ -439,7 +453,7 @@ class BasePlugin:
              dict(TypeName='Switch', Image=9, Used=0), ids('Cooling'), [command_to_number]],
 
             ['READ_PARAMS', 1, (to_float, 10),
-             dict(Type=242, Subtype=1, Used=0), ids('Temperature +-'), (level_with_divider, 1/10)],
+             dict(Type=242, Subtype=1, Used=0), ids('Temp +-'), (level_with_divider, 1/10)],
 
             ['READ_CALCUL', 80, (to_text_state, [268, 0.1]),
              dict(TypeName='Text', Used=1), ids('Working mode')],
@@ -448,55 +462,55 @@ class BasePlugin:
              dict(TypeName='Custom', Used=1, Options={'Custom': '1;l/h'}), ids('Flow')],
 
             ['READ_CALCUL', 231, (to_float, 1),
-             dict(TypeName='Custom', Used=0, Options={'Custom': '1;Hz'}), ids('Compressor frequency')],
+             dict(TypeName='Custom', Used=0, Options={'Custom': '1;Hz'}), ids('Compressor freq')],
 
             ['READ_CALCUL', 227, (to_float, 10),
-             dict(TypeName='Temperature', Used=0), ids('Actual room temperature')],
+             dict(TypeName='Temperature', Used=0), ids('Room temp')],
 
             ['READ_CALCUL', 228, (to_float, 10),
-             dict(TypeName='Temperature', Used=0), ids('Room temperature set')],
+             dict(TypeName='Temperature', Used=0), ids('Room temp target')],
             
             # Power consumption
             ['READ_CALCUL', 268, (to_instant_power, [268]),
              dict(TypeName='kWh', Used=1,
                   Options={'EnergyMeterMode': '1'}),
-             ids('Power consumption - Total')],
+             ids('Power total')],
 
             # Power consumption for heating mode
             ['READ_CALCUL', 268, (to_instant_power_split, [80, [0]]),
              dict(TypeName='kWh', Used=1,
                   Options={'EnergyMeterMode': '1'}),
-             ids('Power consumption - Heating')],
+             ids('Power heating')],
 
             # Power consumption for hot water mode
             ['READ_CALCUL', 268, (to_instant_power_split, [80, [1]]),
              dict(TypeName='kWh', Used=1,
                   Options={'EnergyMeterMode': '1'}),
-             ids('Power consumption - Hot water')],
+             ids('Power DHW')],
 
             # Heat output total
             ['READ_CALCUL', 257, (to_instant_power, [257]),
              dict(TypeName='kWh', Used=1,
                   Options={'EnergyMeterMode': '1'}),
-             ids('Heat output - Total')],
+             ids('Heat out total')],
 
             # Heat output heating mode
             ['READ_CALCUL', 257, (to_instant_power_split, [80, [0]]),
              dict(TypeName='kWh', Used=1,
                   Options={'EnergyMeterMode': '1'}),
-             ids('Heat output - Heating')],
+             ids('Heat out heating')],
 
             # Heat output hot water mode
             ['READ_CALCUL', 257, (to_instant_power_split, [80, [1]]),
              dict(TypeName='kWh', Used=1,
                   Options={'EnergyMeterMode': '1'}),
-             ids('Heat output - Hot water')],
+             ids('Heat out DHW')],
 
             # COP calculated over total
             ['READ_CALCUL', 257, (to_cop_calculator, [257, 268]),
              dict(TypeName='Custom', Used=1,
                   Options={'Custom': '1;COP'}),
-             ids('Heat Pump COP - Total')],
+             ids('COP total')],
         ]
 
         class Unit:
