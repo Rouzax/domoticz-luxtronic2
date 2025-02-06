@@ -281,33 +281,6 @@ def to_text_state(data_list: list, data_idx: int, config: list) -> dict:
     return {'nValue': 0, 'sValue': state_text}
 
 
-def to_time_counter(data_list: list, data_idx: int, config: list) -> dict:
-    """
-    Converts current running seconds to counter increment
-    Args:
-        data_list: Raw data from heat pump
-        data_idx: Index for timer value (67)
-        config: [last_value_idx] (we need to store last value to calculate delta)
-    """
-    current_seconds = data_list[data_idx]
-    
-    # Store the last value between updates to calculate delta
-    if not hasattr(to_time_counter, 'last_value'):
-        to_time_counter.last_value = current_seconds
-    
-    # Calculate delta (time difference since last update)
-    delta = current_seconds - to_time_counter.last_value
-    
-    # Handle rollover/reset cases
-    if delta < 0:
-        delta = current_seconds
-    
-    # Update last value for next time
-    to_time_counter.last_value = current_seconds
-    
-    return {'nValue': 0, 'sValue': str(delta)}
-
-
 # Write callbacks
 def command_to_number(*_args, Command: str, **_kwargs):
     return 1 if Command == 'On' else 0
